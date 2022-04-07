@@ -11,8 +11,8 @@ class Recipe(models.Model):
         User,
         # on_delete=models.CASCADE,
         on_delete=models.SET_DEFAULT,
-        default='DELETED USER',
+        default="DELETEDUSER",
     )
 
     def __str__(self) -> str:
-        return f'id {self.id} by {self.author.username} at {self.datetime_posted}'
+        return f"id {self.id} by {self.author.username} at {self.datetime_posted}"

@@ -1,6 +1,6 @@
 # Recipes - Django Project
 
-This is my first project using Django framework. The repo contains only the content of the project, i.e. no CI/CD, etc.
+This is my first project using Django framework. The repo contains only the content of the project, i.e. no CI/CD, etc. If you wish to check out the project, you should also use your own `SECRET_KEY` :)
 
 The idea came from
 [Corey Shafer's tutorial](https://www.youtube.com/playlist?list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p),
