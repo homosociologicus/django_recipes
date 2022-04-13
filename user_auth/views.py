@@ -21,7 +21,7 @@ def register(request):
         form = UserRegisterForm()
     return render(
         request,
-        "user_auth/register_page.html",
+        "user_auth/register.html",
         {
             "form": form,
         },

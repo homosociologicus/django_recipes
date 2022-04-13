@@ -12,7 +12,7 @@ def home_page(request):
     # return HttpResponse('<h1>Recipes Home</h1>')
     return render(
         request,
-        "recipes/home_page.html",
+        "recipes/home.html",
         context,
     )
 
@@ -24,6 +24,6 @@ def about_page(request):
     # return HttpResponse('<h1>About Recipes Project</h1>')
     return render(
         request,
-        "recipes/about_page.html",
+        "recipes/about.html",
         context,
     )
