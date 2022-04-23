@@ -5,6 +5,8 @@ from tkinter import image_names
 from django.db import models
 from django.contrib.auth.models import User
 
+from PIL import Image
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -15,3 +17,20 @@ class Profile(models.Model):
 
     def __str__(self) -> str:
         return f"{self.user.username} profile"
+
+    def save(self) -> None:
+        super().save()
+
+        # getting the square
+        img = Image.open(self.profile_picture.path)
+        w, h = img.size
+        target_w, target_h = 320, 320
+        if w > target_w or h > target_h:
+            min_dim = min(img.size)
+            left = (w - min_dim) / 2
+            top = (h - min_dim) / 2
+            right = (w + min_dim) / 2
+            bottom = (h + min_dim) / 2
+            img = img.crop((left, top, right, bottom))
+            img.thumbnail((target_w, target_h))
+            img.save(self.profile_picture.path)
