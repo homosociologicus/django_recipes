@@ -1,0 +1,21 @@
+{% extends "recipes/base.html" %}
+{% block content %}
+  <h1>Recipes Home</h1>
+  <article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ object.author.profile.profile_picture.url }}">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="text-decoration-none mr-2" href="#">{{ object.author }}</a>
+        <small class="text-muted">{{ object.datetime_posted|date:"D, F j'y" }}</small>
+        {% if object.author == user %}
+        <div>
+          <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'recipe-update' object.id %}">Update</a>
+          <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'recipe-delete' object.id %}">Delete</a>
+        </div>
+        {% endif %}
+      </div>
+      <h2 class="text-decoration-none article-title">{{ object.title }}</h2>
+      <p class="article-content">{{ object.content }}</p>
+    </div>
+  </article>
+{% endblock content %}

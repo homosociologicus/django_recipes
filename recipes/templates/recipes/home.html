@@ -10,7 +10,9 @@
           <small class="text-muted">{{ recipe.datetime_posted|date:"D, F j'y" }}</small>
         </div>
         <h2>
-          <a class="text-decoration-none article-title" href="#">{{ recipe.title }}</a>
+          <a class="text-decoration-none article-title" href="{% url 'recipe-detail' recipe.id %}">
+            {{ recipe.title }}
+          </a>
         </h2>
         <p class="article-content">{{ recipe.content }}</p>
       </div>
