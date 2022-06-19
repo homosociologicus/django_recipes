@@ -12,7 +12,7 @@ class Recipe(models.Model):
         User,
         # on_delete=models.CASCADE,
         on_delete=models.SET_DEFAULT,
-        default="DELETEDUSER",
+        default=User.objects.get(pk=4),  # "DELETEDUSER"
     )
 
     def __str__(self) -> str:

@@ -1,4 +1,9 @@
-from django.shortcuts import render
+from multiprocessing import AuthenticationError
+from django.shortcuts import (
+    render,
+    get_object_or_404,
+)
+from django.contrib.auth.models import User
 from django.contrib.auth.mixins import (
     LoginRequiredMixin,
     UserPassesTestMixin,
@@ -34,6 +39,22 @@ class RecipeListView(ListView):
     ordering = [
         "-datetime_posted",
     ]
+    paginate_by = 2  # uses Paginator class
+
+
+class UserRecipeListView(ListView):
+    model = Recipe
+
+    # usually looks in f"{app}/{model}_{view_type}.html"
+    template_name = "recipes/user_recipes.html"
+    context_object_name = "recipes"
+    paginate_by = 2  # uses Paginator class
+
+    # get recipes for the chosen user
+    def get_queryset(self):
+        return Recipe.objects.filter(
+            author=get_object_or_404(User, username=self.kwargs.get("username"))
+        ).order_by("-datetime_posted")
 
 
 class RecipeDetailView(DetailView):
@@ -59,11 +80,6 @@ class RecipeUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         "title",
         "content",
     ]
-
-    # override to fill "author" field in db
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
 
     # check that user that updates a recipe is its author
     def test_func(self):
