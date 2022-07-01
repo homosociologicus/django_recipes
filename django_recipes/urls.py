@@ -23,10 +23,14 @@ from django.conf.urls.static import static
 from user_auth import views as user_views
 
 urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("", include("recipes.urls")),
     path(
-        "admin/",
-        admin.site.urls,
+        "profile/",
+        user_views.profile,
+        name="profile",
     ),
+    # authentication block
     path(
         "register/",
         user_views.register,
@@ -43,13 +47,32 @@ urlpatterns = [
         name="logout",
     ),
     path(
-        "profile/",
-        user_views.profile,
-        name="profile",
+        "password-reset/",
+        auth_views.PasswordResetView.as_view(
+            template_name="user_auth/password_reset.html",
+        ),
+        name="password_reset",
     ),
     path(
-        "",
-        include("recipes.urls"),
+        "password-reset/done/",
+        auth_views.PasswordResetDoneView.as_view(
+            template_name="user_auth/password_reset_done.html",
+        ),
+        name="password_reset_done",
+    ),
+    path(
+        "password-reset-confirm/<uidb64>/<token>/",
+        auth_views.PasswordResetConfirmView.as_view(
+            template_name="user_auth/password_reset_confirm.html",
+        ),
+        name="password_reset_confirm",
+    ),
+    path(
+        "password-reset-complete/",
+        auth_views.PasswordResetCompleteView.as_view(
+            template_name="user_auth/password_reset_complete.html",
+        ),
+        name="password_reset_complete",
     ),
 ]
 

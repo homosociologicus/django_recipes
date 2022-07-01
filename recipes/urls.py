@@ -12,7 +12,6 @@ from .views import (
 
 
 urlpatterns = [
-    # path("", views.home_page, name="recipes-home"),
     path("", RecipeListView.as_view(), name="recipes-home"),
     path("about/", about_page, name="recipes-about"),
     path("user/<str:username>", UserRecipeListView.as_view(), name="user-recipes"),
