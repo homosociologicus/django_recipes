@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 
+import django_heroku
+
 from pathlib import Path
 
 
@@ -136,10 +138,14 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Added settings
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "recipes-home"
+
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get("DJANGO_RECIPES_GOOGLE_USER")
 EMAIL_HOST_PASSWORD = os.environ.get("DJANGO_RECIPES_GOOGLE_APP_PASSWORD")
+
+django_heroku.settings(locals())
