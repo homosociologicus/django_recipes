@@ -18,8 +18,8 @@ class Profile(models.Model):
     def __str__(self) -> str:
         return f"{self.user.username} profile"
 
-    def save(self) -> None:
-        super().save()
+    def save(self, *args, **kwargs) -> None:
+        super().save(*args, **kwargs)
 
         # getting the square
         img = Image.open(self.profile_picture.path)
