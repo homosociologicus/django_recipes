@@ -39,7 +39,7 @@ class RecipeListView(ListView):
     ordering = [
         "-datetime_posted",
     ]
-    paginate_by = 2  # uses Paginator class
+    paginate_by = 5  # uses Paginator class
 
 
 class UserRecipeListView(ListView):
@@ -48,7 +48,7 @@ class UserRecipeListView(ListView):
     # usually looks in f"{app}/{model}_{view_type}.html"
     template_name = "recipes/user_recipes.html"
     context_object_name = "recipes"
-    paginate_by = 2  # uses Paginator class
+    paginate_by = 5  # uses Paginator class
 
     # get recipes for the chosen user
     def get_queryset(self):
